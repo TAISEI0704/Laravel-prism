@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: infra/docker/Dockerfile
+    container_name: movie-reviews-app
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "${APP_PORT:-8080}:80"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17
+    container_name: movie-reviews-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_DATABASE:-laravel}
+      - POSTGRES_USER=${DB_USERNAME:-laravel}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-laravel}
+    ports:
+      - "${DB_LOCAL_PORT:-5432}:5432"
+
+volumes:
+  postgres_data:
