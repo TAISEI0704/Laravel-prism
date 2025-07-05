@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: infra/docker/Dockerfile
-    container_name: movie-reviews-app
+    container_name: laravel-prime-app
     volumes:
       - .:/var/www/html
     ports:
@@ -13,7 +13,7 @@ services:
 
   db:
     image: postgres:17
-    container_name: movie-reviews-db
+    container_name: laravel-prime-db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
