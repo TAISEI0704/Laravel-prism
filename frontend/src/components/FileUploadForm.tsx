@@ -45,18 +45,13 @@ const FileUploadForm = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("アップロード結果:", response);
 
       if (response.data.minute_id) {
         setMessage(
-          `アップロード成功！\n` +
-            `ID: ${response.data.minute_id}\n` +
-            (response.data.tasks
-              ? `生成されたタスク: ${response.data.tasks.length}件`
-              : "")
+          `アップロード成功！\n`
         );
       } else {
-        setMessage("アップロードは成功しましたが、IDが返されませんでした。");
+        setMessage("アップロードは成功しましたが、IDが生成されませんでした。");
       }
 
       // フォームをリセット

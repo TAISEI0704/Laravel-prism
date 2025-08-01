@@ -66,7 +66,7 @@ class EmbedMinuteJob implements ShouldQueue
                 foreach ($chunkBatch as $chunk) {
                     // エンベディングを生成して配列として取得
                     $response = Prism::embeddings()
-                        ->using('openai', 'text-embedding-3-small')
+                        ->using('openai', 'text-embedding-3-small') // ここでモデルを指定
                         ->fromInput($chunk->chunk)
                         ->asEmbeddings();  // 直接embeddingsプロパティにアクセス
                     

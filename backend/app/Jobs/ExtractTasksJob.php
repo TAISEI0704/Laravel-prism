@@ -99,6 +99,8 @@ class ExtractTasksJob implements ShouldQueue
 
                     複数のタスクが見つかった場合は、全て抽出してください。")
                 ->using(Provider::OpenAI, 'gpt-4')
+                ->withClientOptions(['timeout' => 60]) 
+                ->withClientRetry(3, 1000)
                 ->asStructured();
 
             // トランザクション開始
@@ -121,7 +123,7 @@ class ExtractTasksJob implements ShouldQueue
                 }
 
                 // すべてのタスクをまとめてSlack通知
-                Notification::route('slack', config('services.slack.notifications.webhook_url'))
+                Notification::route('slack', null)
                     ->notify(new TaskSlackNotification($tasks));
                 
                 DB::commit();

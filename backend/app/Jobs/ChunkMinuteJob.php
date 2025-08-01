@@ -103,12 +103,6 @@ class ChunkMinuteJob implements ShouldQueue
             return;
         }
 
-        \Log::info("Saving chunk:", [
-            'index' => $index,
-            'length' => mb_strlen($chunk),
-            'preview' => mb_substr($chunk, 0, 50) . '...'
-        ]);
-
         $this->minute->chunks()->create([
             'idx' => $index,
             'chunk' => $chunk
