@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d5d31636614a223c17ed021a5a54fbb0",
+    "content-hash": "f8de7ce8d6328bd819c4e029a463d2d3",
     "packages": [
         {
             "name": "brick/math",
@@ -2660,16 +2660,16 @@
         },
         {
             "name": "prism-php/prism",
-            "version": "v0.78.0",
+            "version": "v0.82.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prism-php/prism.git",
-                "reference": "a16dc7b7c34152d19db1453d31f9c67f15576446"
+                "reference": "7b6d059b9fb7a40bc5b3a12cc6f28fd942f8fb21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prism-php/prism/zipball/a16dc7b7c34152d19db1453d31f9c67f15576446",
-                "reference": "a16dc7b7c34152d19db1453d31f9c67f15576446",
+                "url": "https://api.github.com/repos/prism-php/prism/zipball/7b6d059b9fb7a40bc5b3a12cc6f28fd942f8fb21",
+                "reference": "7b6d059b9fb7a40bc5b3a12cc6f28fd942f8fb21",
                 "shasum": ""
             },
             "require": {
@@ -2725,7 +2725,7 @@
             "description": "A powerful Laravel package for integrating Large Language Models (LLMs) into your applications.",
             "support": {
                 "issues": "https://github.com/prism-php/prism/issues",
-                "source": "https://github.com/prism-php/prism/tree/v0.78.0"
+                "source": "https://github.com/prism-php/prism/tree/v0.82.0"
             },
             "funding": [
                 {
@@ -2733,7 +2733,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-24T12:28:49+00:00"
+            "time": "2025-07-25T13:34:13+00:00"
         },
         {
             "name": "psr/clock",
