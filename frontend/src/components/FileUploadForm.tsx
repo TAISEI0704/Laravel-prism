@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import type { FormEvent, ChangeEvent } from "react";
-import axios from "axios";
-
-// CSRFトークンの設定
-axios.defaults.withCredentials = true;
+import axios from "../lib/axios"; // カスタム設定済みのaxiosインスタンス
 
 const FileUploadForm = () => {
   useEffect(() => {
@@ -48,7 +45,20 @@ const FileUploadForm = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      setMessage(`アップロード成功！ ID: ${response.data.minute_id}`);
+      console.log("アップロード結果:", response);
+
+      if (response.data.minute_id) {
+        setMessage(
+          `アップロード成功！\n` +
+            `ID: ${response.data.minute_id}\n` +
+            (response.data.tasks
+              ? `生成されたタスク: ${response.data.tasks.length}件`
+              : "")
+        );
+      } else {
+        setMessage("アップロードは成功しましたが、IDが返されませんでした。");
+      }
+
       // フォームをリセット
       setFile(null);
       setTitle("");
@@ -97,6 +107,7 @@ const FileUploadForm = () => {
           </label>
           <input
             type="file"
+            id="minutesTxt"
             accept=".txt"
             onChange={handleFileChange}
             className="mt-1 block w-full"
@@ -106,8 +117,10 @@ const FileUploadForm = () => {
 
         {message && (
           <div
-            className={`text-sm ${
-              message.includes("成功") ? "text-green-600" : "text-red-600"
+            className={`text-sm whitespace-pre-line p-3 rounded ${
+              message.includes("成功")
+                ? "text-green-700 bg-green-50 border border-green-200"
+                : "text-red-700 bg-red-50 border border-red-200"
             }`}
           >
             {message}

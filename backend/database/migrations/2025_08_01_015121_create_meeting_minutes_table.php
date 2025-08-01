@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('meeting_minutes', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('minute_id')->primary();
+            $table->string('title');
+            $table->date('meeting_date');
+            $table->string('file_path');           // storage path
+            $table->integer('tokens')->nullable(); // total tokens of raw text
             $table->timestamps();
         });
     }

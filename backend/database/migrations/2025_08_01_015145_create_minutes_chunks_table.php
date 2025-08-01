@@ -11,12 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('minute_chunks', function (Blueprint $t) {
-            $t->uuid('minute_id');
-            $t->integer('idx');
-            $t->text('chunk');
-            $t->vector('embedding', 1536);  // pgvector column type
-            $t->primary(['minute_id','idx']);
+        Schema::create('minutes_chunks', function (Blueprint $table) {
+            $table->id();
+            $table->uuid('minute_id');
+            $table->unsignedInteger('idx');
+            $table->text('chunk');
+            $table->vector('embedding', 1536)->nullable();
+            $table->timestamps();
+            
+            $table->foreign('minute_id')
+                  ->references('minute_id')
+                  ->on('meeting_minutes')
+                  ->onDelete('cascade');
         });
     }
 
