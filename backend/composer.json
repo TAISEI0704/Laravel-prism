@@ -9,6 +9,7 @@
         "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
+        "laravel/slack-notification-channel": "^3.6",
         "laravel/tinker": "^2.10.1",
         "prism-php/prism": "^0.82.0"
     },

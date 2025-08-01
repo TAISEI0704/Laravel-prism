@@ -4,6 +4,8 @@ namespace App\Jobs;
 
 use App\Models\Task;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\TaskSlackNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Ramsey\Uuid\UuidInterface;
@@ -105,9 +107,7 @@ class ExtractTasksJob implements ShouldQueue
             try {
                 // レスポンスからタスクを取得
                 $tasks = $response->structured['tasks'];
-                \Log::info($response->structured['tasks']);
-                
-                $createdTasks = [];
+
                 // 各タスクを保存
                 foreach ($tasks as $taskData) {
                     $task = Task::create([
@@ -118,8 +118,11 @@ class ExtractTasksJob implements ShouldQueue
                         'priority' => (int)($taskData['priority'] ?? 3),
                         'status' => 'pending'
                     ]);
-                    $createdTasks[] = $task;
                 }
+
+                // すべてのタスクをまとめてSlack通知
+                Notification::route('slack', config('services.slack.notifications.webhook_url'))
+                    ->notify(new TaskSlackNotification($tasks));
                 
                 DB::commit();
                 
