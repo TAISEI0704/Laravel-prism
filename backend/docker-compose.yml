@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: infra/docker/php/Dockerfile
-    container_name: movie-reviews-app
+    container_name: prism-app
     volumes:
       - .:/var/www/html
     ports:
@@ -12,12 +12,14 @@ services:
       - db
 
   db:
-    image: postgres:17
-    container_name: movie-reviews-db
+    build:
+      context: .
+      dockerfile: infra/docker/postgres/Dockerfile
+    container_name: prism-db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=${DB_DATABASE:-laravel}
+      - POSTGRES_DB=${DB_DATABASE:-laravel-prism}
       - POSTGRES_USER=${DB_USERNAME:-laravel}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-laravel}
     ports:
